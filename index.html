@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONG - Transformando Vidas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Cabeçalho Principal -->
+  <header class="navbar">
+    <div class="logo">
+      <a href="/" data-link>Transformando Vidas</a>
+    </div>
+
+    <!-- Botão Hambúrguer para Celular -->
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir Menu">
+      &#9776; <!-- Ícone do Hambúrguer (☰) -->
+    </button>
+
+    <!-- Navegação Principal com data-link para a History API -->
+    <nav>
+      <ul class="nav-list" id="navList">
+        <li><a href="/" data-link>Sobre Nós</a></li>
+        
+        <!-- Item com Dropdown -->
+        <li class="dropdown">
+          <a href="/projetos" data-link>Projetos &#9662;</a>
+          <ul class="dropdown-menu">
+            <li><a href="/projetos" data-link>Educação para Todos</a></li>
+            <li><a href="/projetos" data-link>Oficina Cultural</a></li>
+          </ul>
+        </li>
+
+        <li><a href="/doar" data-link>Seja Voluntário</a></li>
+        <li><a href="/doar" data-link>Doações</a></li>
+        <li><a href="/contato" data-link>Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contêiner Principal para Gerenciamento e Injeção Dinâmica da SPA -->
+  <main id="app">
+    
+    <!-- Apresentação da ONG -->
+    <section id="sobre">
+      <h2>Sobre a ONG</h2>
+      <p>Nossa ONG ajuda pessoas da comunidade com projetos sociais e educativos para promover a inclusão e o desenvolvimento local.</p>
+      <img 
+  src="img/image.jpg" 
+  onerror="this.onerror=null; this.src='https://via.placeholder.com/900x400?text=Foto+ONG';" 
+  alt="Integrantes da ONG" 
+  style="width: 100%; max-width: 900px; border-radius: 8px;"
+>
+    </section>
+
+    <!-- Gráfico de Impacto Social (Chart.js) -->
+    <section id="grafico-secao">
+      <h2>Impacto das Nossas Ações</h2>
+      <div class="grafico-container">
+        <canvas id="graficoDoacoes"></canvas>
+      </div>
+    </section>
+
+    <!-- Projetos Sociais -->
+    <section id="projetos">
+      <h2>Nossos Projetos Sociais</h2>
+      <div id="lista-projetos" class="grid-projetos">
+        <article>
+          <h3>Projeto Educação para Todos</h3>
+          <p>Aulas de reforço escolar e alfabetização para crianças e jovens da comunidade.</p>
+        </article>
+        <article>
+          <h3>Projeto Oficina Cultural</h3>
+          <p>Aulas de música, arte e teatro para incentivar a cultura local.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Área de Voluntariado e Cadastro Completo -->
+    <section id="voluntariado">
+      <h2>Seja um Voluntário</h2>
+      <p>Preencha o formulário abaixo para se candidatar como voluntário em nossos projetos:</p>
+
+      <form id="formContato" action="#" method="POST" novalidate>
+        
+        <!-- Agrupamento 1: Informações Pessoais -->
+        <fieldset>
+          <legend>Dados Pessoais</legend>
+
+          <p class="form-group">
+            <label for="nome">Nome Completo:</label><br>
+            <input type="text" id="nome" name="nome">
+            <span class="error-message"></span>
+          </p>
+
+          <p class="form-group">
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" name="email">
+            <span class="error-message"></span>
+          </p>
+
+          <p class="form-group">
+            <label for="data-nascimento">Data de Nascimento:</label><br>
+            <input type="date" id="data-nascimento" name="data_nascimento">
+          </p>
+
+          <p class="form-group">
+            <label for="Telefone">Telefone:</label><br>
+            <input 
+              type="tel" 
+              id="Telefone" 
+              name="Telefone" 
+              placeholder="(11) 99999-9999" 
+              maxlength="15"
+            >
+            <span class="error-message"></span>
+          </p>
+
+          <p class="form-group">
+            <label for="CPF">CPF:</label><br>
+            <input 
+              type="text" 
+              id="CPF" 
+              name="CPF" 
+              placeholder="000.000.000-00" 
+              maxlength="14"
+            >
+            <span class="error-message"></span>
+          </p>
+        </fieldset>
+
+        <!-- Agrupamento 2: Endereço -->
+        <fieldset>
+          <legend>Endereço de Correspondência</legend>
+
+          <p class="form-group">
+            <label for="CEP">CEP:</label><br>
+            <input type="text" id="CEP" name="CEP" placeholder="00000-000">
+          </p>
+
+          <p class="form-group">
+            <label for="logradouro">Rua/Avenida:</label><br>
+            <input type="text" id="logradouro" name="logradouro">
+          </p>
+
+          <p class="form-group">
+            <label for="numero">Número:</label><br>
+            <input type="number" id="numero" name="numero">
+          </p>
+
+          <p class="form-group">
+            <label for="cidade">Cidade:</label><br>
+            <input type="text" id="cidade" name="cidade">
+          </p>
+
+          <p class="form-group">
+            <label for="estado">Estado (UF):</label><br>
+            <input type="text" id="estado" name="estado" maxlength="2">
+          </p>
+        </fieldset>
+
+        <!-- Agrupamento 3: Preferências e Áreas de Atuação -->
+        <fieldset>
+          <legend>Áreas de Interesse no Voluntariado</legend>
+
+          <p>Selecione as áreas em que gostaria de atuar:</p>
+
+          <p>
+            <input type="checkbox" id="pedagogico" name="interesses[]" value="pedagogico">
+            <label for="pedagogico">Apoio pedagógico e aulas de reforço</label>
+          </p>
+
+          <p>
+            <input type="checkbox" id="eventos" name="interesses[]" value="eventos">
+            <label for="eventos">Organização de eventos e oficinas</label>
+          </p>
+
+          <p>
+            <input type="checkbox" id="comunicacao" name="interesses[]" value="comunicacao">
+            <label for="comunicacao">Gestão de redes sociais e comunicação</label>
+          </p>
+        </fieldset>
+
+        <br>
+        <button type="submit" class="btn">Enviar Cadastro</button>
+        
+        <!-- Elemento para notificação de sucesso pós-envio -->
+        <div id="feedback-sucesso" class="mensagem-sucesso"></div>
+      </form>
+    </section>
+
+    <!-- Área de Doações -->
+    <section id="doacoes">
+      <h2>Faça uma Doação</h2>
+      <p>Sua contribuição financeira ajuda a manter nossos projetos ativos e impactar mais famílias.</p>
+      <button type="button" class="btn">Fazer Doação via PIX</button>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+      <h2>Contato</h2>
+      <p>E-mail: contato@ong.org</p>
+      <p>Telefone: (11) 99999-9999</p>
+      <p>Endereço: Rua Principal, 123 - São Paulo, SP</p>
+    </section>
+
+    <!-- Badges nas seções -->
+    <span class="badge badge-success">Ativo</span>
+    <span class="badge badge-info">Em breve</span>
+
+    <!-- Caixa de Alerta -->
+    <div class="alert alert-success">
+      <strong>Sucesso!</strong> Seu cadastro de voluntário foi recebido com sucesso.
+    </div>
+
+    <!-- Toast (Notificação no Canto) -->
+    <div class="toast">
+      <span>✓ Obrigado por se cadastrar em nossa ONG!</span>
+    </div>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2026 ONG Transformando Vidas. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Importação da biblioteca Chart.js via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Arquivo de Entrada Principal do JavaScript Modular -->
+  <script src="js/main.js"></script>
+</body>
+</html>

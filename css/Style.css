@@ -1,0 +1,480 @@
+/* =========================================================
+   1. VARIÁVEIS DO PROJETO & RESET BÁSICO
+   ========================================================= */
+:root {
+  /* Cores (8) */
+  --primary: #1b4d3e;
+  --primary-hover: #143a2f;
+  --secondary: #e07a5f;
+  --secondary-hover: #c86348;
+  --bg-main: #f8f9fa;
+  --surface: #ffffff;
+  --text-dark: #2b2d42;
+  --text-muted: #6c757d;
+
+  /* Tipografia (5 tamanhos) */
+  --font-xs: 0.875rem;
+  --font-sm: 1rem;
+  --font-md: 1.25rem;
+  --font-lg: 1.75rem;
+  --font-xl: 2.5rem;
+
+  /* Espaçamentos */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================================
+   2. ESTILOS GERAIS & ESTRUTURA
+   ========================================================= */
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: var(--font-sm);
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--bg-main);
+}
+
+#app, main {
+  width: 100%;
+  display: block;
+}
+
+/* Estrutura Base de Contêineres */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.secao-espacada {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/* Tipografia e Títulos */
+h1 {
+  font-size: var(--font-xl);
+  color: var(--primary);
+  margin-bottom: var(--space-md);
+}
+
+h2 {
+  font-size: var(--font-lg);
+  color: var(--primary);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: var(--space-xs);
+}
+
+h3 {
+  font-size: var(--font-md);
+  color: var(--text-dark);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+/* Imagens */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--space-sm);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  margin: var(--space-sm) 0;
+}
+
+/* =========================================================
+   3. CABEÇALHO, NAVBAR & MENU HAMBÚRGUER / DROPDOWN
+   ========================================================= */
+header, .navbar {
+  background-color: var(--primary);
+  padding: var(--space-md) var(--space-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+header a, .navbar a {
+  color: var(--surface);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-list, nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-lg);
+}
+
+.nav-list a, nav a {
+  font-size: var(--font-sm);
+  transition: opacity 0.2s ease;
+  padding: 8px 12px;
+  display: block;
+}
+
+.nav-list a:hover, nav a:hover {
+  opacity: 0.8;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--primary-hover);
+  list-style: none;
+  padding: var(--space-xs) 0;
+  margin: 0;
+  min-width: 180px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: var(--font-lg);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--primary);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.3s ease;
+  }
+
+  .nav-list.active {
+    max-height: 400px;
+    padding: var(--space-md) 0;
+  }
+
+  .dropdown-menu {
+    position: static;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: none;
+  }
+}
+
+/* =========================================================
+   4. FORMULÁRIOS & CAMPOS DE ENTRADA
+   ========================================================= */
+form, .form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--space-md);
+}
+
+fieldset {
+  border: 1px solid var(--text-muted);
+  border-radius: var(--space-sm);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  background-color: var(--surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+legend {
+  font-weight: bold;
+  font-size: var(--font-sm);
+  color: var(--primary);
+  padding: 0 var(--space-sm);
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: left;
+}
+
+.form-group label, label {
+  margin-bottom: var(--space-xs);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--text-dark);
+  display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--text-muted);
+  border-radius: 4px;
+  font-size: var(--font-sm);
+  background-color: var(--surface);
+  color: var(--text-dark);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(27, 77, 62, 0.2);
+}
+
+/* Validação Visual */
+input:invalid:not(:placeholder-shown) {
+  border-color: #d32f2f;
+  background-color: #fff8f8;
+}
+
+input:user-valid {
+  border-color: #2e7d32;
+  background-color: #f6fff6;
+}
+
+input:user-invalid {
+  border-color: #d32f2f;
+  background-color: #fff8f8;
+}
+
+/* =========================================================
+   5. BOTÕES
+   ========================================================= */
+button,
+input[type="submit"],
+.btn,
+.btn-primary {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary);
+  color: var(--surface);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover,
+.btn:hover,
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:focus,
+.btn:focus {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+button:active,
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:disabled,
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Botão Secundário / Doação */
+.btn-doacao,
+.btn-secondary {
+  background-color: var(--secondary);
+}
+
+.btn-doacao:hover,
+.btn-secondary:hover {
+  background-color: var(--secondary-hover);
+}
+
+/* =========================================================
+   6. GRÁFICO & COMPONENTES VISUAIS (TOASTS / ALERTAS)
+   ========================================================= */
+.grafico-container {
+  width: 100%;
+  max-width: 700px;
+  height: 350px;
+  min-height: 300px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 12px;
+  color: #fff;
+}
+.badge-success { background-color: #2e7d32; }
+.badge-warning { background-color: #f57c00; }
+.badge-info    { background-color: #0288d1; }
+
+.alert {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 15px 0;
+  font-size: var(--font-sm);
+  border-left: 5px solid;
+}
+.alert-success {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border-color: #2e7d32;
+}
+.alert-warning {
+  background-color: #fffde7;
+  color: #f57f17;
+  border-color: #fbc02d;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #323232;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+}
+
+/* =========================================================
+   7. RODAPÉ
+   ========================================================= */
+footer {
+  background-color: var(--text-dark);
+  color: var(--surface);
+  text-align: center;
+  padding: var(--space-lg);
+  margin-top: var(--space-xl);
+  font-size: var(--font-xs);
+}
+
+footer p {
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   8. SISTEMA DE GRID (12 COLUNAS) & BREAKPOINTS RESPONSIVOS
+   ========================================================= */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-md);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-grid { grid-column: span 12; }
+.sidebar { grid-column: span 3; }
+.main-content { grid-column: span 9; }
+
+/* Media Queries */
+@media (max-width: 479px) {
+  .grid-container { grid-template-columns: 1fr; }
+  .sidebar, .main-content { grid-column: span 1; }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .grid-container { grid-template-columns: repeat(4, 1fr); }
+  .sidebar, .main-content { grid-column: span 4; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-container { grid-template-columns: repeat(8, 1fr); }
+  .sidebar, .main-content { grid-column: span 8; }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .grid-container { grid-template-columns: repeat(12, 1fr); }
+  .sidebar { grid-column: span 4; }
+  .main-content { grid-column: span 8; }
+}
+
+@media (min-width: 1440px) {
+  .grid-container {
+    grid-template-columns: repeat(12, 1fr);
+    max-width: 1400px;
+  }
+  .sidebar { grid-column: span 3; }
+  .main-content { grid-column: span 9; }
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: var(--font-xs);
+  margin-top: 4px;
+  display: block;
+}
+
+.input-error input {
+  border-color: #d32f2f !important;
+  background-color: #fff8f8;
+}
